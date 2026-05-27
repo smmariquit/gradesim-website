@@ -4,7 +4,31 @@ const CHROME_URL =
   "https://chromewebstore.google.com/detail/elbi-gradesim-uplb-gwa-ca/mlhklblbhkikcmobmmajckjcbmdinldb";
 const FIREFOX_URL =
   "https://addons.mozilla.org/en-US/firefox/addon/elbi-gradesim/";
+const EDGE_URL =
+  "https://microsoftedge.microsoft.com/addons/detail/elbi-gradesim-uplb-gwa-/ebiakebpglddgmkdehdjiadnjgkmgnga";
 const GITHUB_URL = "https://github.com/smmariquit/gradesim";
+
+const DESKTOP_COMPAT = [
+  { browser: "Google Chrome", icon: "/chrome.svg", support: "✅ Full", store: "Chrome Web Store", storeUrl: CHROME_URL, notes: "Native support" },
+  { browser: "Mozilla Firefox", icon: "/firefox.svg", support: "✅ Full", store: "Firefox Add-ons", storeUrl: FIREFOX_URL, notes: "Native support" },
+  { browser: "Microsoft Edge", icon: "/edge.svg", support: "✅ Full", store: "Edge Add-ons", storeUrl: EDGE_URL, notes: "Native support" },
+  { browser: "Opera", icon: null, support: "✅ Full", store: "Chrome Web Store", storeUrl: CHROME_URL, notes: "Install via Chrome Web Store" },
+  { browser: "Brave", icon: null, support: "✅ Full", store: "Chrome Web Store", storeUrl: CHROME_URL, notes: "Install via Chrome Web Store" },
+  { browser: "Vivaldi", icon: null, support: "✅ Full", store: "Chrome Web Store", storeUrl: CHROME_URL, notes: "Install via Chrome Web Store" },
+  { browser: "Arc", icon: null, support: "✅ Full", store: "Chrome Web Store", storeUrl: CHROME_URL, notes: "Install via Chrome Web Store" },
+  { browser: "Safari", icon: null, support: "❌ None", store: "—", storeUrl: null, notes: "Not supported" },
+];
+
+const MOBILE_COMPAT = [
+  { browser: "Firefox Android", support: "✅ Works", notes: "Install from Firefox Add-ons" },
+  { browser: "Kiwi Browser", support: "⚠️ Untested", notes: "Supports Chrome extensions; should work" },
+  { browser: "Samsung Internet", support: "❌ None", notes: "No extension support" },
+  { browser: "Chrome Android", support: "❌ None", notes: "Chrome mobile doesn't support extensions" },
+  { browser: "Chrome iOS", support: "❌ None", notes: "iOS doesn't support browser extensions" },
+  { browser: "Safari iOS", support: "❌ None", notes: "Not supported" },
+  { browser: "Edge Mobile", support: "❌ None", notes: "Mobile Edge doesn't support add-ons" },
+  { browser: "Opera Mobile", support: "❌ None", notes: "No extension support on mobile" },
+];
 
 const FEATURES = [
   {
@@ -50,7 +74,7 @@ const STEPS = [
     number: "1",
     title: "Install the Extension",
     description:
-      "Add Elbi GradeSim to Chrome or Firefox. Free, takes a few seconds.",
+      "Add Elbi GradeSim to Chrome, Firefox, or Edge. Free, takes a few seconds.",
   },
   {
     number: "2",
@@ -192,6 +216,9 @@ export default function Home() {
               <a href={FIREFOX_URL} target="_blank" rel="noopener noreferrer" className="btn btn-outline" id="hero-firefox-btn">
                 <img src="/firefox.svg" alt="" className="btn-icon" /> Add to Firefox
               </a>
+              <a href={EDGE_URL} target="_blank" rel="noopener noreferrer" className="btn btn-outline" id="hero-edge-btn">
+                <img src="/edge.svg" alt="" className="btn-icon" /> Add to Edge
+              </a>
             </div>
 
             <div className={styles.heroStats}>
@@ -289,7 +316,7 @@ export default function Home() {
           <div className="section-label">Download</div>
           <h2 className="section-title">Get Elbi GradeSim</h2>
           <p className="section-subtitle">
-            Available on Chrome and Firefox. Free, open-source, and privacy-first.
+            Available on Chrome, Firefox, and Edge. Free, open-source, and privacy-first.
           </p>
 
           <div className={styles.downloadCards}>
@@ -320,6 +347,21 @@ export default function Home() {
               <div className={styles.downloadBadge}>
                 <span className={styles.downloadBadgeIcon}>✓</span>
                 Verified on Firefox Add-ons
+              </div>
+            </div>
+
+            <div className={`card ${styles.downloadCard}`}>
+              <img src="/edge.svg" alt="Microsoft Edge" className={styles.downloadBrowserIcon} />
+              <h3 className={styles.downloadBrowserName}>Microsoft Edge</h3>
+              <p className={styles.downloadBrowserVersion}>
+                Version 1.1.1 · Edge Add-ons
+              </p>
+              <a href={EDGE_URL} target="_blank" rel="noopener noreferrer" className="btn btn-primary" id="download-edge-btn">
+                Add to Edge
+              </a>
+              <div className={styles.downloadBadge}>
+                <span className={styles.downloadBadgeIcon}>✓</span>
+                Verified on Edge Add-ons
               </div>
             </div>
           </div>
@@ -379,6 +421,81 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Browser Compatibility */}
+      <section className="section" id="compatibility">
+        <div className="container">
+          <div className="section-label">Compatibility</div>
+          <h2 className="section-title">Desktop Browser Support</h2>
+          <p className="section-subtitle">
+            Works on all Chromium-based browsers via the Chrome Web Store, plus native Firefox and Edge support.
+          </p>
+
+          <div className={styles.compatTableWrapper}>
+            <table className={styles.compatTable}>
+              <thead>
+                <tr>
+                  <th>Browser</th>
+                  <th>Support</th>
+                  <th>Install From</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {DESKTOP_COMPAT.map((row, i) => (
+                  <tr key={i}>
+                    <td className={styles.compatBrowser}>
+                      {row.icon && <img src={row.icon} alt="" className={styles.compatIcon} />}
+                      {!row.icon && <span className={styles.compatIconPlaceholder}>🌐</span>}
+                      {row.browser}
+                    </td>
+                    <td><span className={styles.compatSupport}>{row.support}</span></td>
+                    <td>
+                      {row.storeUrl ? (
+                        <a href={row.storeUrl} target="_blank" rel="noopener noreferrer" className={styles.compatStoreLink}>
+                          {row.store}
+                        </a>
+                      ) : (
+                        <span className={styles.compatNoStore}>{row.store}</span>
+                      )}
+                    </td>
+                    <td className={styles.compatNotes}>{row.notes}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h2 className="section-title" style={{ marginTop: '64px' }}>Mobile Browser Support</h2>
+          <p className="section-subtitle">
+            Most mobile browsers don&apos;t support extensions. Firefox Android is the main exception.
+          </p>
+
+          <div className={styles.compatTableWrapper}>
+            <table className={styles.compatTable}>
+              <thead>
+                <tr>
+                  <th>Browser</th>
+                  <th>Support</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {MOBILE_COMPAT.map((row, i) => (
+                  <tr key={i}>
+                    <td className={styles.compatBrowser}>
+                      <span className={styles.compatIconPlaceholder}>📱</span>
+                      {row.browser}
+                    </td>
+                    <td><span className={styles.compatSupport}>{row.support}</span></td>
+                    <td className={styles.compatNotes}>{row.notes}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className={styles.cta} id="cta">
         <div className="container">
@@ -393,6 +510,9 @@ export default function Home() {
               </a>
               <a href={FIREFOX_URL} target="_blank" rel="noopener noreferrer" className="btn btn-outline" id="cta-firefox-btn">
                 <img src="/firefox.svg" alt="" className="btn-icon" /> Add to Firefox
+              </a>
+              <a href={EDGE_URL} target="_blank" rel="noopener noreferrer" className="btn btn-outline" id="cta-edge-btn">
+                <img src="/edge.svg" alt="" className="btn-icon" /> Add to Edge
               </a>
               <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="btn btn-outline" id="cta-github-btn">
                 <GitHubIcon /> View on GitHub
@@ -413,6 +533,7 @@ export default function Home() {
           <div className={styles.footerLinks}>
             <a href={CHROME_URL} target="_blank" rel="noopener noreferrer" className={styles.footerLink}>Chrome Web Store</a>
             <a href={FIREFOX_URL} target="_blank" rel="noopener noreferrer" className={styles.footerLink}>Firefox Add-ons</a>
+            <a href={EDGE_URL} target="_blank" rel="noopener noreferrer" className={styles.footerLink}>Edge Add-ons</a>
             <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className={styles.footerLink}>GitHub</a>
             <a href={`${GITHUB_URL}/blob/main/PRIVACY_POLICY.md`} target="_blank" rel="noopener noreferrer" className={styles.footerLink}>Privacy Policy</a>
           </div>

@@ -267,7 +267,7 @@
 /* ===== Download ===== */
 .downloadCards {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 28px;
   margin-top: 48px;
 }
@@ -413,6 +413,101 @@
 .programItem:hover {
   background: var(--surface-hover);
   color: var(--text);
+}
+
+/* ===== Compatibility Tables ===== */
+.compatTableWrapper {
+  margin-top: 32px;
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.compatTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.compatTable thead {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.compatTable th {
+  text-align: left;
+  padding: 14px 20px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.compatTable td {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.compatTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.compatTable tbody tr {
+  transition: background 0.15s ease;
+}
+
+.compatTable tbody tr:hover {
+  background: var(--surface-hover);
+}
+
+.compatBrowser {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.compatIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.compatIconPlaceholder {
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.compatSupport {
+  white-space: nowrap;
+}
+
+.compatStoreLink {
+  color: var(--maroon-light);
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.compatStoreLink:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.compatNoStore {
+  color: var(--text-muted);
+}
+
+.compatNotes {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
 }
 
 /* ===== CTA ===== */
