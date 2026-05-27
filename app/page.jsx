@@ -173,7 +173,7 @@ const PROGRAMS = [
   },
   {
     college: "College of Human Ecology",
-    programs: ["BS Human Development & Family Studies", "BS Nutrition"],
+    programs: ["BS Human Ecology", "BS Nutrition"],
   },
   {
     college: "College of Veterinary Medicine",
